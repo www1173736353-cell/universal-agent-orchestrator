@@ -35,3 +35,7 @@ Install from the extracted Skill directory. Installer refuses to overwrite an ex
 ## Architecture source
 
 The approved 30 decisions remain valid. See `references/architecture.md` for the provider-neutral amendments; see `references/adapter-contract.md` for adding any new agent, and `references/tiering.md` for multi-axis classification.
+
+## Local visual console / 本地可视化控制台
+
+The tested fixture under `orchestration-test/` includes a loopback-only GUI that shows Antigravity state, event progress, measured token usage, changed paths, deterministic tests and Codex review results. / `orchestration-test/` 中包含已验证的本地控制台，可显示 Antigravity 状态、事件进度、实测 token、变更文件、确定性测试和 Codex 审核结果。
