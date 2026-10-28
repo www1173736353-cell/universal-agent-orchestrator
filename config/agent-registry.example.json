@@ -1,0 +1,35 @@
+{
+  "protocol_version": "1",
+  "agents": [
+    {
+      "id": "agent-any-vendor-a",
+      "display_name": "Placeholder developer via any CLI/API/MCP",
+      "adapter": "custom",
+      "transport": "cli",
+      "enabled": false,
+      "verification": "unverified",
+      "assurance_tier": 0,
+      "roles": ["developer", "tester"],
+      "capabilities": ["workspace_write", "structured_output"],
+      "read_only_enforced": false,
+      "max_parallel": 1,
+      "cost_class": "medium",
+      "data_scopes": ["public"]
+    },
+    {
+      "id": "agent-any-vendor-b",
+      "display_name": "Placeholder independent reviewer via any provider",
+      "adapter": "custom",
+      "transport": "api",
+      "enabled": false,
+      "verification": "unverified",
+      "assurance_tier": 0,
+      "roles": ["reviewer", "planner"],
+      "capabilities": ["read_only", "structured_output"],
+      "read_only_enforced": false,
+      "max_parallel": 1,
+      "cost_class": "medium",
+      "data_scopes": ["public"]
+    }
+  ]
+}

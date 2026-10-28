@@ -1,0 +1,23 @@
+{
+  "protocol_version": "1",
+  "global_max_concurrent_developers": 2,
+  "max_repair_rounds": 3,
+  "max_transient_retries": 3,
+  "protected_branch_patterns": ["main", "master", "release/*"],
+  "allow_automatic_push": false,
+  "allow_automatic_deploy": false,
+  "allow_automatic_protected_merge": false,
+  "require_independent_read_only_review": true,
+  "allowed_execution_transports": ["cli", "api", "mcp", "remote-worker", "custom"],
+  "minimum_assurance_by_role": {
+    "planner": 1,
+    "developer": 2,
+    "reviewer": 1,
+    "tester": 1,
+    "integrator": 2,
+    "analyst": 1
+  },
+  "usage_unknown_action": "pause_before_budget_sensitive_dispatch",
+  "sensitive_data_default": "internal",
+  "ponytail": "optional_if_verified"
+}

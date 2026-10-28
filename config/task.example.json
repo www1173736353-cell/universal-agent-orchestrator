@@ -1,0 +1,9 @@
+{
+  "task_id": "T-001",
+  "role": "developer",
+  "complexity": "C2",
+  "minimum_assurance_tier": 2,
+  "required_capabilities": ["workspace_write", "structured_output"],
+  "data_scope": "public",
+  "cost_preference": "low"
+}
