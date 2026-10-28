@@ -16,6 +16,20 @@ This is a provider-neutral **control skill**. The current host may be Codex, Cla
 5. Run `python3 scripts/doctor.py --registry <registry.json> --policy <policy.json>` to validate a registry. The tool does not contact providers.
 6. For routing dry runs, use `python3 scripts/route.py --registry <registry.json> --task <task.json>`. This chooses a candidate but **does not execute** any Agent.
 
+## When the requested chain cannot run
+
+Return the blocker immediately when any required prerequisite is missing or unverified. Do not continue with a simulated dispatch, do not present a dry run as execution, and do not claim that a review or integration happened.
+
+The response must include:
+
+1. **Blocker**: the exact missing or failed capability, such as `aio` unavailable, adapter probe failed, no eligible agent, missing isolated worktree, or review gate unavailable.
+2. **Evidence**: the command, probe result, registry decision, error, or SHA that proves the blocker. Mark each item as `measured`, `estimated`, or `unavailable` where applicable.
+3. **Impact**: the first control-protocol step that cannot be completed and the work that was not performed.
+4. **Resolution**: the concrete setup or approval required, including the adapter/transport, permission boundary, configuration change, or human action needed.
+5. **Resume condition**: the exact verification to run before retrying. Do not retry an uncertain task blindly; recover and verify persisted state first.
+
+Use an explicit status such as `blocked`, `partial`, or `dry_run_only`. A successful static validation only proves configuration syntax and policy checks; it does not prove provider availability, execution, sandboxing, review independence, or integration.
+
 ## Control protocol
 
 - Parse requirements into versioned, task-specific contracts: goal, dependencies, interface versions, allowlisted file scope, quality gates and acceptance criteria.
