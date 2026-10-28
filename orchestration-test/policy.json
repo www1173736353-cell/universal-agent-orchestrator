@@ -1,0 +1,9 @@
+{
+  "protocol_version": "1",
+  "global_max_concurrent_developers": 1,
+  "max_repair_rounds": 3,
+  "require_independent_read_only_review": true,
+  "allow_automatic_push": false,
+  "allow_automatic_deploy": false,
+  "allow_automatic_protected_merge": false
+}
