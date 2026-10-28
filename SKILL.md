@@ -1,6 +1,6 @@
 ---
 name: universal-agent-orchestrator
-description: Orchestrate software development with interchangeable AI agents, capability-based routing, isolated Git worktrees, independent review, budget gates, and human approval. Use for planning, dispatching, reviewing, resuming, or auditing multi-agent development tasks across any provider.
+description: Orchestrate software development with interchangeable AI agents, capability-based routing, isolated Git worktrees, independent review, budget gates, human approval, and a local visual control console. Use for planning, dispatching, reviewing, resuming, or auditing multi-agent development tasks across any provider. / 使用可互换的 AI Agent、能力路由、隔离 Git Worktree、独立审核、预算门禁、人工审批和本地可视化控制台来编排软件开发；适用于多供应商 Agent 任务的规划、调度、审核、恢复和审计。
 ---
 
 # Universal Agent Orchestrator
