@@ -1,0 +1,29 @@
+{
+  "protocol_version": "1",
+  "agents": [
+    {
+      "id": "codex",
+      "adapter": "codex-desktop",
+      "transport": "custom",
+      "enabled": false,
+      "verification": "unverified",
+      "assurance_tier": 0,
+      "roles": ["planner", "reviewer"],
+      "capabilities": ["read_only", "structured_output"],
+      "read_only_enforced": true,
+      "data_scopes": ["internal"]
+    },
+    {
+      "id": "antigravity",
+      "adapter": "antigravity-desktop",
+      "transport": "custom",
+      "enabled": false,
+      "verification": "unverified",
+      "assurance_tier": 0,
+      "roles": ["developer"],
+      "capabilities": ["workspace_write", "structured_output"],
+      "read_only_enforced": false,
+      "data_scopes": ["internal"]
+    }
+  ]
+}
