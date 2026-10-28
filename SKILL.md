@@ -75,6 +75,22 @@ Token: 12,345 input + 678 output, total 13,023 (measured)
 
 If status, events, or usage cannot be read, return that as a blocker with the exact missing capability and its resolution. Do not report “正在运行” solely because a process was started.
 
+## Visual control console
+
+For interactive runs, the backend must provide a local GUI in addition to JSON status. A terminal process or raw log file is not an adequate progress interface.
+
+The console must show:
+
+- a task list with state, owner, employee, reviewer, duration, last event and blocker;
+- a selected-task timeline from plan approval through dispatch, Antigravity actions, tests, review, repairs and integration;
+- the current employee action, provider session ID, latest output summary and next expected transition;
+- worktree path, base/head SHAs, changed-file list and a read-only diff view;
+- test and review gate results, repair round, approval requests and failed checks;
+- measured, estimated and unavailable token/cost values with their timestamps and adapter source;
+- explicit controls for refresh, cancel, pause, resume-after-verification and human approval, each recording an audit event.
+
+The default GUI transport is a local-only HTTP server with a browser view or an equivalent desktop panel. Bind it to loopback unless the operator explicitly configures authenticated remote access. Do not render secrets, raw tokens or restricted task context into logs, URLs or client-side storage. Use server-sent events or bounded polling for live updates; show a stale-data indicator when the last event exceeds the configured heartbeat window. The GUI must preserve the same fail-closed statuses as the CLI and must never turn an unavailable status into a green progress indicator.
+
 ## On any unsafe or missing capability
 
 Fail closed. State which adapter/capability is unavailable and what verified setup is required. No provider receives filesystem/network/secrets access merely by appearing in the registry. Executable permissions are enforced by the backend/OS, not by instructions in this Skill.
