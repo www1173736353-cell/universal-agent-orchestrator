@@ -1,0 +1,11 @@
+{
+  "protocol_version": "1",
+  "task_id": "antigravity-calculator-001",
+  "goal": "Add multiply(a, b) to employee-repo/src/calculator.py and add deterministic tests.",
+  "supervisor": {"agent_id": "codex", "role": "planner"},
+  "employee": {"agent_id": "antigravity", "role": "developer"},
+  "reviewer": {"agent_id": "codex", "role": "reviewer", "read_only": true},
+  "allowed_paths": ["employee-repo/src/calculator.py", "employee-repo/tests/test_calculator.py"],
+  "acceptance": ["existing add test passes", "multiply behavior is covered", "review is independent and read-only"],
+  "integration_requires_human_approval": true
+}
