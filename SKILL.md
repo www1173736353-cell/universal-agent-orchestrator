@@ -44,6 +44,37 @@ Use an explicit status such as `blocked`, `partial`, or `dry_run_only`. A succes
 - Track usage as `measured`, `estimated`, or `unavailable`. Enforce project-level caps to the extent observable; pause before additional calls at a hard limit. Never claim perfect prediction of in-flight usage.
 - Save status transitions, plan approvals, checksums, code SHA, review evidence and usage to durable storage through the backend. For uncertain state after interruption, require recovery verification before replay.
 
+## Live task visibility
+
+The supervisor must expose a queryable status record while an employee Agent is running. Do not make the user infer progress from a silent terminal or from the existence of a process.
+
+The backend should provide a command such as `aio status --task <task_id> --json` and durable event records. Each status response must include:
+
+- `task_id`, `run_id`, `plan_version` and current `state` (`queued`, `planning`, `dispatched`, `working`, `testing`, `reviewing`, `repairing`, `blocked`, `awaiting_approval`, `completed`, or `failed`);
+- supervisor, employee and reviewer identities, roles, adapter names, and the employee provider session/conversation ID when available;
+- `current_phase`, `current_action`, `last_event_at`, `last_output_summary`, changed paths, base/head SHAs, and the next expected transition;
+- deterministic gate results, review findings, repair round, blockers, required user action, and whether the worktree is clean or has uncommitted changes;
+- `usage` with `input_tokens`, `output_tokens`, `thinking_tokens`, `cache_read_tokens`, `total_tokens`, duration and cost when available;
+- `usage_quality` for every usage value: `measured`, `estimated`, or `unavailable`. Never convert an unavailable value to zero and never claim token precision the adapter did not provide.
+
+Emit an event at dispatch, tool invocation, meaningful progress, test start/end, review start/end, repair start/end, blocker, approval request, completion and failure. Heartbeats may refresh `last_event_at`, but must not fabricate progress or token usage. If an adapter cannot stream events, poll its run record at a bounded interval and report the visibility limitation explicitly.
+
+The user-facing status report must separate `completed`, `in_progress`, `blocked`, `unavailable`, and `estimated` information. A minimum report is:
+
+```text
+状态: working
+员工: antigravity / developer
+当前阶段: testing
+当前动作: running unit tests
+最近事件: 2026-10-28T...
+进度依据: measured event or unavailable
+Token: 12,345 input + 678 output, total 13,023 (measured)
+阻塞: none
+下一步: independent Codex read-only review
+```
+
+If status, events, or usage cannot be read, return that as a blocker with the exact missing capability and its resolution. Do not report “正在运行” solely because a process was started.
+
 ## On any unsafe or missing capability
 
 Fail closed. State which adapter/capability is unavailable and what verified setup is required. No provider receives filesystem/network/secrets access merely by appearing in the registry. Executable permissions are enforced by the backend/OS, not by instructions in this Skill.
