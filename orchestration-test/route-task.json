@@ -1,0 +1,9 @@
+{
+  "task_id": "antigravity-calculator-001",
+  "role": "developer",
+  "complexity": "C1",
+  "minimum_assurance_tier": 2,
+  "required_capabilities": ["workspace_write", "structured_output"],
+  "data_scope": "internal",
+  "cost_preference": "low"
+}
